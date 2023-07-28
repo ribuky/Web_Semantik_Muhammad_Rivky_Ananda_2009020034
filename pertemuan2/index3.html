@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pertemuan 1</title>
+    <script
+      src="https://code.jquery.com/jquery-3.6.4.js"
+      integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E="
+      crossorigin="anonymous"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+      integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-11">
+          <h1>Universitas Muhammadiyah Sumatera Utara</h1>
+          <p>
+            <b>Alamat</b>
+            <i
+              >Jl. Kapt. Mukhtar Basri No. 3 Medan Sumatera Utara 20238
+              Indonesia. <br />061-6619056, 6622400 Ext. 106 & 108 061-
+              6625474</i
+            >
+          </p>
+        </div>
+        <div class="col-sm-1" style="margin-left: -200px">
+          <img src="../img/LogoUMSU.png" style="height: 90px" alt="logo" />
+        </div>
+      </div>
+      <hr />
+
+      <div class="row">
+        <div class="col-sm-8">
+          <h4>Daftar Mahasiswa</h4>
+          <table class="table table-dark table-striped" id="tabel-data">
+            <thead>
+              <tr>
+                <th>NPM</th>
+                <th>Nama</th>
+                <th>Jurusan</th>
+                <th>Tanggal Lahir</th>
+                <th>Alamat</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <div class="col-sm-4">
+          <form id="form-data">
+            <div class="form-group">
+              <label for="npm" class="form-label">NPM</label>
+              <input type="number" class="form-control" id="npm" name="npm" />
+              <p
+                id="isi-npm"
+                class="text-danger"
+                style="font-style: italic"
+              ></p>
+              <p id="done-npm"></p>
+            </div>
+            <div class="form-group">
+              <label for="nama" class="form-label">NAMA</label>
+              <input type="nama" class="form-control" id="nama" name="nama" />
+              <p
+                id="isi-nama"
+                class="text-danger"
+                style="font-style: italic"
+              ></p>
+              <p id="done-nama"></p>
+            </div>
+            <div class="form-group">
+              <label for="tanggal">Tanggal Lahir</label>
+              <input
+                type="date"
+                name="tanggal"
+                id="tanggal"
+                name="tanggal"
+                class="form-control"
+              />
+              <p
+                id="isi-tanggal"
+                class="text-danger"
+                style="font-style: italic"
+              ></p>
+              <p id="done-tanggal"></p>
+            </div>
+            <div class="form-group">
+              <label for="jurusan" class="form-label">Jurusan</label>
+              <select class="form-control" name="jurusan" id="jurusan">
+                <option value="" selected>Pilih Jurusan</option>
+                <option>Teknologi Informasi</option>
+                <option>Sistem Informasi</option>
+                <option>Informasi Terkini</option>
+              </select>
+            </div>
+            <div class="form-floating">
+              <label for="alamat">Alamat</label>
+              <textarea
+                class="form-control"
+                placeholder="Leave a comment here"
+                name="alamat"
+                id="alamat"
+                style="height: 100px"
+              ></textarea>
+              <p
+                id="isi-alamat"
+                class="text-danger"
+                style="font-style: italic"
+              ></p>
+              <p id="done-alamat"></p>
+            </div>
+            <div class="row">
+              <div class="col-sm-6">
+                <button type="reset" class="btn btn-danger">Batal</button>
+              </div>
+              <div class="col-sm-6" style="text-align: right">
+                <button type="submit" class="btn btn-info" id="simpan">
+                  Simpan
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Load jQuery and Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <script>
+      $(document).ready(function () {
+        // Tombol Simpan
+        $("#simpan").click(function () {
+          var npm = $("#npm").val();
+          var nama = $("#nama").val();
+          var tanggal_lahir = $("#tanggal_lahir").val();
+          var alamat = $("#alamat").val();
+
+          // Cek jika ada input yang kosong
+          if (npm.trim() === "") {
+            $("#help-npm").text("NPM tidak boleh kosong");
+            return;
+          } else {
+            $("#help-npm").text("");
+          }
+          if (nama.trim() === "") {
+            $("#help-nama").text("Nama tidak boleh kosong");
+            return;
+          } else {
+            $("#help-nama").text("");
+          }
+          if (tanggal_lahir.trim() === "") {
+            $("#help-tanggal_lahir").text("Tanggal Lahir tidak boleh kosong");
+            return;
+          } else {
+            $("#help-tanggal_lahir").$("#help-tanggal_lahir").text("");
+          }
+          if (alamat.trim() === "") {
+            $("#help-alamat").text("Alamat tidak boleh kosong");
+            return;
+          } else {
+            $("#help-alamat").text("");
+          }
+
+          // Membuat objek data
+          var data = {
+            npm: npm,
+            nama: nama,
+            tanggal_lahir: tanggal_lahir,
+            alamat: alamat,
+          };
+
+          // Menambahkan data ke dalam tabel
+          var row = $("<tr>")
+            .append($("<td>").text(data.npm))
+            .append($("<td>").text(data.nama))
+            .append($("<td>").text(data.tanggal_lahir))
+            .append($("<td>").text(data.alamat))
+            .append(
+              $("<td>").append(
+                $("<button>")
+                  .addClass("btn btn-danger btn-sm hapus")
+                  .text("Hapus")
+              )
+            );
+
+          $("#table-data tbody").append(row);
+
+          // Reset form
+          $("#form-data")[0].reset();
+        });
+
+        // Tombol Hapus
+        $("#table-data tbody").on("click", ".hapus", function () {
+          $(this).closest("tr").remove();
+        });
+
+        // Tombol Batal
+        $("#batal").click(function () {
+          $("#form-data")[0].reset();
+          $("#help-npm").text("");
+          $("#help-nama").text("");
+          $("#help-tanggal_lahir").text("");
+          $("#help-alamat").text("");
+        });
+      });
+    </script>
+  </body>
+</html>

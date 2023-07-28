@@ -1,0 +1,16 @@
+.peringatan {
+    font-weight: bold;
+    font-style: italic;
+    color: crimson;
+}
+
+.hasil_jumlah_kembalian {
+    color: crimson;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.hasil_total_bayar {
+    font-weight: bold;
+    font-size: 25px;
+}

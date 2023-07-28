@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Form dan Tabel dengan Bootstrap</title>
+    <!-- Load Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <h2>Form Input Data</h2>
+      <form>
+        <div class="form-group">
+          <label for="npm">NPM:</label>
+          <input
+            type="text"
+            class="form-control"
+            id="npm"
+            placeholder="Masukkan NPM"
+          />
+          <span class="help-block" id="help-npm"></span>
+        </div>
+        <div class="form-group">
+          <label for="nama">Nama:</label>
+          <input
+            type="text"
+            class="form-control"
+            id="nama"
+            placeholder="Masukkan Nama"
+          />
+          <span class="help-block" id="help-nama"></span>
+        </div>
+        <div class="form-group">
+          <label for="tanggal_lahir">Tanggal Lahir:</label>
+          <input type="date" class="form-control" id="tanggal_lahir" />
+          <span class="help-block" id="help-tanggal_lahir"></span>
+        </div>
+        <div class="form-group">
+          <label for="alamat">Alamat:</label>
+          <textarea
+            class="form-control"
+            id="alamat"
+            rows="3"
+            placeholder="Masukkan Alamat"
+          ></textarea>
+          <span class="help-block" id="help-alamat"></span>
+        </div>
+        <button type="button" class="btn btn-primary" id="simpan">
+          Simpan
+        </button>
+        <button type="button" class="btn btn-default" id="batal">Batal</button>
+      </form>
+      <br />
+      <h2>Data Mahasiswa</h2>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>NPM</th>
+            <th>Nama</th>
+            <th>Tanggal Lahir</th>
+            <th>Alamat</th>
+          </tr>
+        </thead>
+        <tbody id="data-mahasiswa"></tbody>
+      </table>
+    </div>
+
+    <!-- Load jQuery and Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <script>
+      $(document).ready(function () {
+        // Tombol Simpan
+        $("#simpan").click(function () {
+          var npm = $("#npm").val();
+          var nama = $("#nama").val();
+          var tanggal_lahir = $("#tanggal_lahir").val();
+          var alamat = $("#alamat").val();
+
+          // Cek jika ada input yang kosong
+          if (npm.trim() === "") {
+            $("#help-npm").text("NPM tidak boleh kosong");
+            return;
+          } else {
+            $("#help-npm").text("");
+          }
+          if (nama.trim() === "") {
+            $("#help-nama").text("Nama tidak boleh kosong");
+            return;
+          } else {
+            $("#help-nama").text("");
+          }
+          if (tanggal_lahir.trim() === "") {
+            $("#help-tanggal_lahir").text("Tanggal Lahir tidak boleh kosong");
+            return;
+          } else {
+            $("#help-tanggal_lahir").$("#help-tanggal_lahir").text("");
+          }
+          if (alamat.trim() === "") {
+            $("#help-alamat").text("Alamat tidak boleh kosong");
+            return;
+          } else {
+            $("#help-alamat").text("");
+          }
+
+          // Membuat objek data
+          var data = {
+            npm: npm,
+            nama: nama,
+            tanggal_lahir: tanggal_lahir,
+            alamat: alamat,
+          };
+
+          // Menambahkan data ke dalam tabel
+          var row = $("<tr>")
+            .append($("<td>").text(data.npm))
+            .append($("<td>").text(data.nama))
+            .append($("<td>").text(data.tanggal_lahir))
+            .append($("<td>").text(data.alamat))
+            .append(
+              $("<td>").append(
+                $("<button>")
+                  .addClass("btn btn-danger btn-sm hapus")
+                  .text("Hapus")
+              )
+            );
+
+          $("#table-data tbody").append(row);
+
+          // Reset form
+          $("#form-data")[0].reset();
+        });
+
+        // Tombol Hapus
+        $("#table-data tbody").on("click", ".hapus", function () {
+          $(this).closest("tr").remove();
+        });
+
+        // Tombol Batal
+        $("#batal").click(function () {
+          $("#form-data")[0].reset();
+          $("#help-npm").text("");
+          $("#help-nama").text("");
+          $("#help-tanggal_lahir").text("");
+          $("#help-alamat").text("");
+        });
+      });
+    </script>
+  </body>
+</html>
